@@ -22,7 +22,7 @@ export const PokemonApp = () => {
             <li key={pokemon.name}> {pokemon.name}</li>
             )}
         </ul>
-        <button onClick={() => dispatch(getPokemons(page))}>
+        <button onClick={() => dispatch(getPokemons(page))} disabled={isLoading}>
           Next
         </button>
     </>
