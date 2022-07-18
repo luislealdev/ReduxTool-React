@@ -1,11 +1,13 @@
-export const getPokemons = (page=0) => {
-    return async(dispatch, getState) => {
-        dispatch(firtsLoadingPokemons());
+import { pokemonApi } from "../../../api/pokemonApi";
+import { firtsLoadingPokemons, setPokemons } from "./pokemonSlice";
 
-        //TODO: Make petition https
+export const getPokemons = (page = 0) => {
+  return async (dispatch, getState) => {
+    dispatch(firtsLoadingPokemons());
 
-        //Data pokemons
+    const { data } = await pokemonApi.get(`/pokemon?limit=10&offset=${page * 10}`);
+    console.log(data);
 
-        //Dispatch the setPokemons
-    }
-}
+    dispatch(setPokemons({ pokemons: data.results, page: page + 1 }));
+  };
+};
